@@ -1,10 +1,10 @@
 -module(p05).
--export([reverse/1],tail_reverse/1).
+-export([reverse/1]).
 
-reverse([]) ->
-   [];
-reverse([H|T]) ->
-   reverse(T)++[H].
+reverse(L) ->
+   reverse(L,[]).
 
-tail_reverse(L) ->
-   tail_reverse(L,[])
+reverse([], Acc) ->
+   Acc;
+reverse([H|T], Acc) ->
+   reverse(T, [H|Acc]).
