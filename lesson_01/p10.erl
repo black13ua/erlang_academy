@@ -6,7 +6,6 @@ encode(List) ->
 
 encode([], Acc) ->
    p05:reverse(Acc);
-
 encode([H|T], Acc) ->
    encode(T, [{p04:len(H), getfirst(H)}|Acc]).
 
