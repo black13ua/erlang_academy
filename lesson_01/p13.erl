@@ -6,10 +6,7 @@ decode(List) ->
 
 decode([], Acc) ->
    Acc;
-
-decode([{Count=0,Letter}|T], Acc) ->
-[Count, Acc];
-%   decode([{0, Letter}|T], [Letter|Acc]);
-
-decode([{Count,Letter}|T], Acc) ->
-   decode([{Count - 1, Letter}|T], [Letter|Acc]).
+decode([{0, Letter}|T], Acc) ->
+   decode(T, Acc);
+decode([{X, Letter}|T], Acc) ->
+   decode([{X - 1, Letter}|T], [Letter|Acc]).
