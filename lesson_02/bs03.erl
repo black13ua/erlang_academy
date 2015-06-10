@@ -16,12 +16,11 @@ parse_binary(Binary, BinDltr, DLen, BinAcc, Result) ->
     <<HBAcc:1/binary, TBAcc/binary>> = BinAcc,
     case check_delimeter(BinDltr, BinAcc) of
 	true ->
-		good;
+		parse_binary(BTail, BinDltr, DLen, <<>>, Result);
 	false ->
-		io:format("To loop: ~p~n", [[<<TBAcc/binary, BTail:1/binary>>]]),
-		parse_binary(<<TBAcc/binary, BTail/binary>>, BinDltr, DLen, <<TBAcc/binary, BTail:1/binary>>, <<HBAcc/binary>>)
+		io:format("To loop: ~p~n", [[TBAcc, BTail, Result]]),
+		parse_binary(<<TBAcc/binary, BTail/binary>>, BinDltr, DLen, <<TBAcc/binary, BTail:1/binary>>, [HBAcc|Result])
     end.
-
 
 check_delimeter(BinDltr, BinAcc) ->
     %%% Debug output
